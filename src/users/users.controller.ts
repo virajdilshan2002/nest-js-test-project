@@ -1,6 +1,7 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { Public } from 'src/decorator/public.decorator';
+import { UserDTO } from 'src/dto/user.dto';
 
 @Controller('users')
 export class UsersController {
@@ -8,7 +9,7 @@ export class UsersController {
 
     @Public()
     @Post('register')
-    register(@Body() userDto: Record<string, any>) {
+    register(@Body() userDto: UserDTO) {
         return this.userService.register(userDto);
     }
 }

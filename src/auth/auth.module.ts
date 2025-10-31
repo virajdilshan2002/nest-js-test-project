@@ -6,10 +6,14 @@ import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from './constants';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from './auth.guard';
+import { ItemModule } from 'src/item/item.module';
+import { OrdersModule } from 'src/orders/orders.module';
 
 @Module({
   imports: [
     UsersModule,
+    ItemModule,
+    OrdersModule,
     JwtModule.register({
       global: true,
       secret: jwtConstants.secret,
