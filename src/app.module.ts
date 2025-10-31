@@ -9,6 +9,8 @@ import { ItemModule } from './item/item.module';
 import { Item } from './entities/item.entity';
 import { OrdersModule } from './orders/orders.module';
 import { Orders } from './entities/orders.entity';
+import { InvoiceModule } from './invoice/invoice.module';
+import { BullModule } from '@nestjs/bullmq';
 
 @Module({
   imports: [
@@ -23,10 +25,17 @@ import { Orders } from './entities/orders.entity';
       synchronize: true,
       autoLoadEntities: true,
     }),
+    BullModule.forRoot({
+      connection: {
+        host: 'localhost',
+        port: 6379,
+      },
+    }),
     AuthModule, 
     UsersModule,
     ItemModule,
     OrdersModule,
+    InvoiceModule,
   ],
   controllers: [AppController],
   providers: [AppService],
