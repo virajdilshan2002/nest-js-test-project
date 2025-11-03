@@ -11,6 +11,9 @@ import { OrdersModule } from './orders/orders.module';
 import { Orders } from './entities/orders.entity';
 import { InvoiceModule } from './invoice/invoice.module';
 import { BullModule } from '@nestjs/bullmq';
+import { Invoice } from './entities/invoice.entity';
+import { EmailModule } from './email/email.module';
+import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
   imports: [
@@ -21,7 +24,7 @@ import { BullModule } from '@nestjs/bullmq';
       username: 'root',
       password: 'Viraj@2002',
       database: 'nestjstest',
-      entities: [User, Item, Orders],
+      entities: [User, Item, Orders, Invoice],
       synchronize: true,
       autoLoadEntities: true,
     }),
@@ -31,11 +34,13 @@ import { BullModule } from '@nestjs/bullmq';
         port: 6379,
       },
     }),
+    ScheduleModule.forRoot(),
     AuthModule, 
     UsersModule,
     ItemModule,
     OrdersModule,
     InvoiceModule,
+    EmailModule,
   ],
   controllers: [AppController],
   providers: [AppService],
